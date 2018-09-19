@@ -24,6 +24,7 @@ func Create()  {
 	
 	fmt.Println("enter the first name")
 	fmt.Scanf("%s",&book.Firstname)
+	
 	fmt.Println("enter the last name")
 	fmt.Scanf("%s",&book.Lastname)
 	fmt.Println("enter the mobile number")
@@ -39,7 +40,8 @@ func Create()  {
 	fmt.Println("enter the zip")
 	fmt.Scanf("%d",&book.Zipcode)
 	
-	b1:=Address{
+	b1:=[]Address{
+		{
 		Firstname:book.Firstname,
 		Lastname:book.Lastname,
 		Mobile:book.Mobile,
@@ -48,6 +50,7 @@ func Create()  {
 		Streetno:book.Streetno,
 		Streetname:book.Streetname,
 		Zipcode:book.Zipcode,
+		},
 	}
 	
 	buf:=new(bytes.Buffer)
@@ -64,6 +67,7 @@ func Create()  {
 	// if err!=nil{
 	// 	log.Fatal(err)
 	// }
+	// fmt.Println(string(data))
 
 	// xp:=[]Address{b1}
 	// fmt.Println("go data: %+v",xp)

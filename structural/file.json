@@ -1,10 +1,12 @@
-{
-    "firstname": "dilip",
-    "lastname": "kumar",
-    "mobile": 123,
-    "state": "kar",
-    "City": "ben",
-    "Streetno": 12,
-    "Streetname": "ram",
-    "zip": 33
-}
+[
+    {
+        "firstname": "Dilip",
+        "lastname": "Kumar",
+        "mobile": 123,
+        "state": "kar",
+        "City": "ben",
+        "Streetno": 12,
+        "Streetname": "ram",
+        "zip": 33
+    }
+]
