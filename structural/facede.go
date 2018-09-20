@@ -1,11 +1,8 @@
 package main
 import (
-	"log"
 	"encoding/json"
-	// "log"
-	"bytes"
-	"io"
-	"os"
+	"io/ioutil"
+	"os"  
 	"fmt"
 )
 type Address struct{
@@ -17,7 +14,7 @@ type Address struct{
 	Streetno int `json:"Streetno"`
 	Streetname string `json:"Streetname"`
 	Zipcode int`json:"zip"`
-}
+} 
 
 func Create()  {
 	var book Address	
@@ -40,28 +37,48 @@ func Create()  {
 	fmt.Println("enter the zip")
 	fmt.Scanf("%d",&book.Zipcode)
 	
-	b1:=[]Address{
-		{
-		Firstname:book.Firstname,
-		Lastname:book.Lastname,
-		Mobile:book.Mobile,
-		State:book.State,
-		City:book.City,
-		Streetno:book.Streetno,
-		Streetname:book.Streetname,
-		Zipcode:book.Zipcode,
-		},
-	}
-	
-	buf:=new(bytes.Buffer)
-	encoder:=json.NewEncoder(buf)
-	encoder.Encode(b1)
-	file,err:=os.Create("file.json")
-	if(err!=nil){
-		log.Fatal(err)
-	}
-	defer file.Close()
-	io.Copy(file,buf) 
+	file, err1 := ioutil.ReadFile("file.json")
+if err1 != nil {
+os.Exit(1)
+}
+var arr []Address
+
+err2 := json.Unmarshal(file, &arr)
+if err2 != nil {
+fmt.Println("error:", err2)
+os.Exit(1)
+}
+arr = append(arr, Address{
+	Firstname:book.Firstname,
+	Lastname:book.Lastname,
+	Mobile:book.Mobile,
+	State:book.State,
+	City:book.City,
+	Streetno:book.Streetno,
+	Streetname:book.Streetname,
+	Zipcode:book.Zipcode,
+	})
+
+result, err := json.Marshal(arr)
+if err != nil {
+fmt.Println(err)
+}
+err = ioutil.WriteFile("file.json", result, 0644)
+
+fmt.Printf("%+v", string(result))
+for i := range arr {
+fmt.Printf("firstName: %s\n", arr[i].Firstname)
+fmt.Printf("lastName: %s\n", arr[i].Lastname)
+}
+	// buf:=new(bytes.Buffer)
+	// encoder:=json.NewEncoder(buf)
+	// encoder.Encode(b1)
+	// file,err:=os.Create("file.json")
+	// if(err!=nil){
+	// 	log.Fatal(err)
+	// }
+	// defer file.Close()
+	// io.Copy(file,buf) 
 
 	// data,err:=json.Marshal(b1)
 	// if err!=nil{
@@ -78,7 +95,9 @@ func Create()  {
 	// fmt.Println("json: ",string(data))
 }
 
+func Delete(){
 
+}
 
 
   
