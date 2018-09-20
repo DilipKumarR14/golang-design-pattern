@@ -60,12 +60,10 @@ type UserTerminal struct {
 // Execute just runs known commands for current authorized user
 func (gt *UserTerminal) Execute(cmd string) (resp string, err error) {
 	// Set "terminal" prefix for output
-	prefix := fmt.Sprintf("%s@go_term$:", gt.User)
+	prefix := fmt.Sprintf("%s@admin$:", gt.User)
 
 	// Execute some asked commands if we know them
 	switch cmd {
-	case "say_hi":
-		resp = fmt.Sprintf("%s Hi %s", prefix, gt.User)
 	case "man":
 		resp = fmt.Sprintf("%s Visit 'https://golang.org/doc/' for Golang documentation", prefix)
 	case "date":
@@ -125,7 +123,7 @@ func (t *Terminal) Execute(command string) (resp string, err error) {
 
 	// Transfer data to original object and execute command
 	if resp, err = t.terminal.Execute(command); err != nil {
-		err = fmt.Errorf("I know only how to execute commands: say_hi, man, date, time")
+		err = fmt.Errorf("I know only how to execute commands: man, date, time")
 		return
 	}
 
@@ -136,9 +134,9 @@ func (t *Terminal) Execute(command string) (resp string, err error) {
 func authorizeUser(user string) (err error) {
 	// As we use terminal like proxy, then
 	// we will intercept user name to validate if it's allowed to execute commands
-	if user == "dilip" {// Do some logs, notifications etc...
+	if user == "dilip" || user =="DILIP" {// Do some logs, notifications etc...
 		return
-	}else if user =="gopher" {
+	}else if user =="VIJAY" || user == "vijay"{
 		return
 	}else{
 		fmt.Println("Insufficent Privilege ")
