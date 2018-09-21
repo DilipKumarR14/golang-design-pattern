@@ -27,13 +27,13 @@ func main() {
 	fmt.Println("Enter the Command to Execute : ")
 	var res string
 	fmt.Scanf("%s",&res)
-	excResp, excErr := t.Execute(res) // Proxy prints to STDOUT -> PROXY: Intercepted execution of user (gopher), asked command (say_hi)
+	excResp, excErr := t.Execute(res) // Proxy prints to STDOUT -> PROXY: Intercepted execution of user (user), asked command (say_hi)
 	if excErr != nil {
 		fmt.Printf("ERROR: %s\n", excErr.Error()) // Prints: ERROR: I know only how to execute commands: say_hi, man
 	}
 
 	// Show execution response
-	fmt.Println(excResp) // Prints: gopher@go_term$: Hi gopher
+	fmt.Println(excResp) // Prints: dilip@go_term$: Hi user
 }
 
 /*
@@ -43,7 +43,7 @@ func main() {
 
 /*
  ITerminal is interface, it's a public method whose implemented in 
-Terminal(Proxy) and Gopher Terminal
+Terminal(Proxy) and user Terminal
 */
 type ITerminal interface {
 	Execute(cmd string) (resp string, err error)
@@ -60,7 +60,7 @@ type UserTerminal struct {
 // Execute just runs known commands for current authorized user
 func (gt *UserTerminal) Execute(cmd string) (resp string, err error) {
 	// Set "terminal" prefix for output
-	prefix := fmt.Sprintf("%s@admin$:", gt.User)
+	prefix := fmt.Sprintf("%s@admin$:", gt.User) 
 
 	// Execute some asked commands if we know them
 	switch cmd {
